@@ -146,3 +146,84 @@ body {
 *{
 	overflow: visible;
 }
+
+@media (max-width: 480px)  {
+	.main-box-404 {
+		position:absolute;
+		display:flex;
+		flex-direction: column;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: #e00980;
+		width:250px;
+		height:375px;
+		border-radius:23px;
+		text-align:center;
+		align-items: center;
+		align-content: center;
+	}
+	.header-404 {
+		font-size:75px;
+		position:relative;
+		top:10px;
+		color:rgb(65, 3, 41);
+		font-weight:bolder;
+	}
+	.text-404 {
+		font-size:30px;
+		position:relative;
+		top:0px;
+		font-weight:bold;
+		color:rgb(65, 3, 41);
+		
+	}
+	.text-404 > span {
+		right:13.5px;
+		position:relative;
+	}
+	.main-box-404 > i {
+		position:relative;
+		top:5px;
+	}
+	.main-box-redirect {
+		position:absolute;
+		display:flex;
+		flex-direction: column;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: #e00980;
+		width:250px;
+		height:375px;
+		border-radius:23px;
+		text-align:center;
+		align-items: center;
+		align-content: center;
+	}
+	.header-redirect {
+		font-size:45px;
+		position:relative;
+		top:60px;
+		color:rgb(65, 3, 41);
+		font-weight:bold;
+	}
+	.loading-redirect {
+		font-size:80px;
+		position:relative;
+		top:5px;
+		font-weight:bold;
+		color:rgb(65, 3, 41);
+		
+	}
+	
+	.loader {
+		border: 20px solid rgb(65, 3, 41);
+		border-top: 20px solid rgb(153, 4, 41); 
+		border-radius: 50%;
+		width: 95px;
+		height: 95px;
+		animation: spin 3s linear infinite;
+		margin-top:60px;
+	}
+}
