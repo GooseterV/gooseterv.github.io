@@ -146,6 +146,62 @@ body {
 *{
 	overflow: visible;
 }
+.buttons-box {
+	animation: fadein 2s;
+}
+.project-box {
+	animation: fadein 2s;
+	display:flex;
+	flex-direction:column;
+
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.project-button {
+	width:135px;
+	height:135px;
+	border-radius: 5px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	text-decoration: none;
+	border: 0.67rem solid transparent;
+	text-decoration: none;
+	background-color:#fa1781;
+	margin: 15px;
+	font-family:"Quicksand" !important;
+	margin-top:50px;
+}
+.project-button-row {
+	display:flex;
+	position:relative;
+	flex-direction:row;
+}
+.project-header {
+	font-size:100px;
+	font-family:"Quicksand" !important;
+	position:absolute;
+	top:20%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	font-weight:bold;
+	color:rgb(65, 3, 41);
+	text-align:center;
+	justify-content:center;
+	align-items: center;
+	
+}
+.project-header > span {
+	font-size:60px;
+}
+.project-button > a {
+	font-size:medium;
+}
+.project-button > span {
+	font-size:10px;
+}
 
 @media (max-width: 480px)  {
 	.main-box-404 {
@@ -225,6 +281,10 @@ body {
 		height: 95px;
 		animation: spin 3s linear infinite;
 		margin-top:60px;
+	}
+	.project-button {
+		width:0px;
+		height:0px;
 	}
 }
 @media (max-height: 480px) {
@@ -306,60 +366,28 @@ body {
 		animation: spin 3s linear infinite;
 		margin-top:-7px;
 	}
+	.project-button {
+		width:130px;
+		height:145px;
+	}
+	.project-header {
+		font-size:25px;
+		top:13.5%;
+	}
+	.project-header > span{
+		font-size:30px;
+		
+	}
+	.project-header > span {
+		font-size:xs;
+	}
+	.project-button > a {
+		font-size:10px;
+	}
 }
-.buttons-box {
-	animation: fadein 2s;
-}
-.project-box {
-	animation: fadein 2s;
-	display:flex;
-	flex-direction:column;
-
-}
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-.project-button {
-	width:135px;
-	height:135px;
-	border-radius: 5px;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	text-decoration: none;
-	border: 0.67rem solid transparent;
-	text-decoration: none;
-	background-color:#fa1781;
-	margin: 15px;
-	font-family:"Quicksand" !important;
-	margin-top:50px;
-}
-.project-button-row {
-	display:flex;
-	position:relative;
-	flex-direction:row;
-}
-.project-header {
-	font-size:100px;
-	font-family:"Quicksand" !important;
-	position:absolute;
-	top:20%;
-	left:50%;
-	transform: translate(-50%, -50%);
-	font-weight:bold;
-	color:rgb(65, 3, 41);
-	text-align:center;
-	justify-content:center;
-	align-items: center;
-	
-}
-.project-header > span {
-	font-size:60px;
-}
-.project-button > a {
-	font-size:medium;
-}
-.project-button > span {
-	font-size:10px;
+@media (max-width: 1280px) {
+	.project-header {
+		font-size:40px;
+		top:13.5%;
+	}
 }
