@@ -14,7 +14,7 @@ async function crackEgg(eggstate) {
         
         egg.style.display = "none"
         document.getElementsByClassName("main-box-redirect")[0].style = ""
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 100));
         document.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
         egg.id = "egg-cracked"
         
