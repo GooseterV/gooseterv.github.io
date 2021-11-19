@@ -9,7 +9,7 @@ async function crackEgg(eggstate) {
     }
     if (egghealth === 0)  {
         egg.style = "animation: shake 75ms cubic-bezier(.36,.07,.19,.97) infinite;"
-        await new Promise(resolve => setTimeout(resolve, 3500));
+        await new Promise(resolve => setTimeout(resolve, 3250));
         egg.style = ""
         
         egg.style.display = "none"
