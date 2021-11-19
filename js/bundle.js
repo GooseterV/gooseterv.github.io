@@ -10,27 +10,34 @@ async function crackEgg(eggstate) {
     if (egghealth === 0)  {
         egg.style = "animation: shake 75ms cubic-bezier(.36,.07,.19,.97) infinite;"
         await new Promise(resolve => setTimeout(resolve, 3250));
-        egg.style = ""
-        
-        egg.style.display = "none"
+        egg.firstElementChild.id = "egg-cracked"
+        egg.style = "display: none;"
+        egg.firstElementChild.display = "none"
+        egg.firstElementChild.src = ""
         document.getElementsByClassName("main-box-redirect")[0].style = ""
         await new Promise(resolve => setTimeout(resolve, 100));
         document.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        egg.id = "egg-cracked"
+        
         
     }
-    if (egghealth <= 5) {
+    if (egghealth < 0) {
+        egg.firstElementChild.display = "none"
+        egg.firstElementChild.src = ""
+    }
+    if (egghealth <= 5 && egghealth > 0 && egghealth != 0) {
         egg.style = "animation: shake 0.25s cubic-bezier(.36,.07,.19,.97) both;"
         await new Promise(resolve => setTimeout(resolve, 250));
         egg.style = ""
         egg.setAttribute("data-health", `${parseInt(egg.getAttribute("data-health"))-1}`)
-        egg.id = "egg-bigcrack"
+        egg.firstElementChild.src = "src/egg_crack2.png"
+        egg.firstElementChild.id = "egg-bigcrack"
     }
     if (egghealth <= 14 && egghealth > 5 && egghealth != 0) {
         egg.style = "animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;"
         await new Promise(resolve => setTimeout(resolve, 500));
         egg.style = ""
         egg.setAttribute("data-health", `${parseInt(egg.getAttribute("data-health"))-1}`)
-        egg.id = "egg-smallcrack"
+        egg.firstElementChild.id = "egg-smallcrack"
+        egg.firstElementChild.src = "src/egg_crack1.png"
     }
 }

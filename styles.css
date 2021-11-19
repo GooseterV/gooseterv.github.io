@@ -220,6 +220,12 @@ body {
 	font-family:"Quicksand" !important;
 }
 
+.egg > img {
+	width:600px;
+	height:600px;
+}
+
+
 @keyframes shake {
 	10%, 90% {
 	  transform: translate(-50%, -50%) translate3d(-1px, 0, 0);
