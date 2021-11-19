@@ -12,7 +12,7 @@ async function crackEgg(eggstate) {
         await new Promise(resolve => setTimeout(resolve, 3000));
         egg.style = ""
         egg.firstElementChild.id = "egg-cracked"
-        egg.firstElementChild.src = "src/egg_cracked"
+        egg.firstElementChild.src = "src/egg_cracked.png"
         await new Promise(resolve => setTimeout(resolve, 750));
         egg.style.display = "none" 
         egg.firstElementChild.display = "none"
