@@ -17,8 +17,52 @@
 		<meta property="og:image" content="">
 	</head>
 	<body style="background-color: rgb(153, 4, 41);">
+		<div class="debug-box">
+			<div class="debug-subheader">
+				Google Fonts: <i class="fas fa-spinner" id="gfonts-error"></i>
+			</div>
+			<div class="debug-text" style="left:-25px;">
+				Used to import fonts
+			</div>
+			<div class="debug-subheader">
+				Google Apis: <i class="fas fa-spinner" id="gapi-error"></i>
+			</div>
+			<div class="debug-text" style="left:-25px; font-size:20px;">
+				Used to import scripts and stylesheets
+			</div>
+			<div class="debug-subheader">
+				Cloudflare: <i class="fas fa-spinner" id="cloudflare-error"></i>
+			</div>
+			<div class="debug-text" style="left:-25px; font-size:20px;">
+				Used to import scripts and stylesheets
+			</div>
+		</div>
 		<div id="particles-js"></div>
 		<script src="./js/particles.js"></script>
 		<script src="./js/app.js"></script>
+		<script>
+		
+		const db = async () => {debug().then((res) => {
+			if (res.cloudflare === true) {
+				document.getElementById("cloudflare-error").classList = "fas fa-check-square"
+			}
+			else if (res.cloudflare === false) {
+				document.getElementById("cloudflare-error").classList = "fas fa-times-circle"
+			}
+			if (res.gfonts === true) {
+				document.getElementById("gfonts-error").classList = "fas fa-check-square"
+			}
+			else if (res.gfonts === false) {
+				document.getElementById("gfonts-error").classList = "fas fa-times-circle"
+			}
+			if (res.gapi === true) {
+				document.getElementById("gapi-error").classList = "fas fa-check-square"
+			}
+			else if (res.gapi === false) {
+				document.getElementById("gapi-error").classList = "fas fa-times-circle"
+			}
+		})}
+		setTimeout(db, 1250)
+		</script>
 	</body>
 </html>
