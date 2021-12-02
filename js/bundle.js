@@ -50,7 +50,7 @@ async function debug() {
 	const v = {
 		"gapi": null,
 		"gfonts": null,
-		"cloudflare":null
+		"cloudflare": null
 	}
 	await fetch("https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js").then(
 		(res) => {
@@ -78,4 +78,3 @@ async function debug() {
 		})
 	return v
 }
-
