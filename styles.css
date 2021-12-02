@@ -275,6 +275,7 @@ button:hover {
 	text-align:left;
 	margin-bottom:10px;
 }
+
 @media (max-width: 480px)  {
 	.main-box-404 {
 		position:absolute;
