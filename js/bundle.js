@@ -1,9 +1,12 @@
+async function sleep(ms) {
+	await new Promise(resolve => setTimeout(resolve, ms));
+}
 async function crackEgg(eggstate) {
 	let egg = document.getElementsByClassName("egg")[0];
 	let egghealth = parseInt(egg.getAttribute("data-health"));
 	if (egghealth >= 15) {
 		egg.style = "animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;"
-		await new Promise(resolve => setTimeout(resolve, 820));
+		await sleep(820)
 		egg.style = ""
 		egg.setAttribute("data-health", `${parseInt(egg.getAttribute("data-health"))-1}`)
 	}
@@ -14,12 +17,12 @@ async function crackEgg(eggstate) {
 		egg.firstElementChild.id = "egg-cracked"
 		//egg.firstElementChild.src = "src/egg_cracked.png"
 		egg.style.display = "none"
-		await new Promise(resolve => setTimeout(resolve, 750));
+		await sleep(750);
 		egg.style.display = "none"
 		egg.firstElementChild.display = "none"
 		egg.firstElementChild.src = ""
 		document.getElementsByClassName("main-box-redirect")[0].style = ""
-		await new Promise(resolve => setTimeout(resolve, 100));
+		await sleep(100)
 		document.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
 
@@ -30,7 +33,7 @@ async function crackEgg(eggstate) {
 	}
 	if (egghealth <= 5 && egghealth > 0 && egghealth != 0) {
 		egg.style = "animation: shake 0.25s cubic-bezier(.36,.07,.19,.97) both;"
-		await new Promise(resolve => setTimeout(resolve, 250));
+		await sleep(250)
 		egg.style = ""
 		egg.setAttribute("data-health", `${parseInt(egg.getAttribute("data-health"))-1}`)
 		egg.firstElementChild.src = "src/egg_crack2.png"
@@ -38,7 +41,7 @@ async function crackEgg(eggstate) {
 	}
 	if (egghealth <= 14 && egghealth > 5 && egghealth != 0) {
 		egg.style = "animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;"
-		await new Promise(resolve => setTimeout(resolve, 500));
+		await sleep(500)
 		egg.style = ""
 		egg.setAttribute("data-health", `${parseInt(egg.getAttribute("data-health"))-1}`)
 		egg.firstElementChild.id = "egg-smallcrack"
@@ -78,3 +81,55 @@ async function debug() {
 		})
 	return v
 }
+class Business {
+    constructor(name) {
+		// setting the name of business for future reference
+		this.name = name
+		// amount of money owned
+		this.money = 0.00;
+		// monthly income
+		this.income = 30.00;
+		// monthly expenses
+		this.expenses = 15.00;
+		// banked money
+		this.bank = 100.00;
+		// yearly bank interest
+		this.interest = 1.5;
+		// To-Do
+		// rate of food consuming; like the oregon trail game -- meager, filling, bare bones
+		// food purchasing system 
+		// inflation system
+		// 'wildcards' - random things that happen such as; "you got polio", "your business went bankrupt"
+		// , "you found a mysterious package containing $100"
+
+	};
+	depositCash(cash) {
+		if (this.money < cash) {
+			throw "Error: Tried to deposit more money than business owns.";
+		} else if (this.money >= cash) {
+			this.money -= cash;
+			this.bank += cash;
+			return (this.money, this.bank)
+		};
+	};
+	withdrawCash(cash) {
+		if (this.bank < cash) {
+			throw "Error: Tried to withdraw more money than business has in bank.";
+		} else if (this.bank >= cash) {
+			this.bank -= cash;
+			this.money += cash;
+			return (this.money, this.bank)
+		};
+	};
+
+	claimSalary() {
+		factory.money += this.income;
+		return factory.money;
+	};
+	
+	gainInterest() {
+		this.bank += ((this.interest/ 100) * this.bank).toFixed(2)
+	}
+	
+}
+
