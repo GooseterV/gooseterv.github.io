@@ -98,7 +98,7 @@ class Business {
 		// banked money
 		this.bank = 100.00;
 		// semi-annual bank interest
-		this.interest = 6.10;
+		this.interest = 4.37;
 		// current round
 		this.currentRound = 0;
 		// business loans
@@ -199,6 +199,7 @@ class Business {
 			if (Object.values(loan).includes(id) && this.money >= loan.amount) {
 				this.loans.pop(this.loans.indexOf(loan)-1);
 				this.money -= loan.amount;
+				loan.paid = true;
 			} else if (!(Object.values(loan).includes(id))) {
 				throw "Error: invalid loan id.";
 			} else if (this.money < loan.amount) {
