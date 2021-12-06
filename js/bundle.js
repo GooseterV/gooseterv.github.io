@@ -171,7 +171,7 @@ class Business {
 		};
 		if (this.currentRound % 30 === 0) {
 			this.claimSalary();
-			this.payEmployees();
+			this.payAllEmployees();
 		};
 	};
 	
