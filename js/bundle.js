@@ -158,6 +158,12 @@ class Business {
 			for (let loan of this.loans) {
 				loan.days += 1;
 				loan.interest = 0.1 * loan.days;
+				loan.amount += ((loan.amount/ 100) * loan.interest).toFixed(2);
+			};
+		};
+		if (this.employees.length > 0) {
+			for (let employee of this.employees) {
+				employee.daysWorked += 1;
 			};
 		};
 		if (this.currentRound % 128 === 0) {
@@ -165,6 +171,7 @@ class Business {
 		};
 		if (this.currentRound % 30 === 0) {
 			this.claimSalary();
+			this.payEmployees();
 		};
 	};
 	
@@ -186,14 +193,14 @@ class Business {
 			throw "Error: You cannot take a loan for more money than you make.";
 		};
 	};
-
+	
 	payLoan(id) {
 		for (let loan of this.loans) {
 			if (Object.values(loan).includes(id) && this.money >= loan.amount) {
 				this.loans.pop(this.loans.indexOf(loan)-1);
 				this.money -= loan.amount;
 			} else if (!(Object.values(loan).includes(id))) {
-				throw "Error: not a valid loan id!";
+				throw "Error: invalid loan id.";
 			} else if (this.money < loan.amount) {
 				throw "Error: you do not have enough money to pay for this loan!";
 			};
@@ -206,5 +213,30 @@ class Business {
 		};
 	};
 
+	hireEmployee() {
+		const wage = Math.random() * (29.36 - 15.72) + 14.78;
+		this.employees.push({
+			"id":[...Array(12)].map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+			"wage":wage,
+			// amoutn of days employee has worked
+			"daysWorked":0
+		});
+	};
+	payEmployee(id) {
+		for (let employee of this.employees) {
+			if (Object.values(employee).includes(id) && this.money >= employee.wage) {
+				this.money -= employee.wage;
+			} else if (!(Object.values(employee).includes(id))) {
+				throw "Error: Invalid employee id.";
+			} else if (this.money < employee.wage) {
+				throw "Error: Not enough money to pay employee.";
+			};
+		};
+	};
+	payAllEmployees() {
+		for (let employee of this.employees) {
+			this.payEmployee(employee.id);
+		};
+	};
 };
 
