@@ -54,55 +54,59 @@ async function debug() {
 		"gapi": null,
 		"gfonts": null,
 		"cloudflare": null
-	}
+	};
 	await fetch("https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js").then(
 		(res) => {
 			if (res.status != 200) {
-				v.gapi = false
+				v.gapi = false;
 			} else if (res.status === 200) {
-				v.gapi = true
-			}
-		})
+				v.gapi = true;
+			};
+		});
 	await fetch("https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&family=Noto+Sans+JP&family=Red+Hat+Display&family=Quicksand:wght@600&display=swap").then(
 		(res) => {
 			if (res.status != 200) {
-				v.gfonts = false
+				v.gfonts = false;
 			} else if (res.status === 200) {
-				v.gfonts = true
-			}
-		})
+				v.gfonts = true;
+			};
+		});
 	await fetch("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css").then(
 		(res) => {
 			if (res.status != 200) {
-				v.cloudflare = false
+				v.cloudflare = false;
 			} else if (res.status === 200) {
-				v.cloudflare = true
-			}
-		})
+				v.cloudflare = true;
+			};
+		});
 	return v
 }
+
 class Business {
     constructor(name) {
+		// starting year is 1929
 		// setting the name of business for future reference
-		this.name = name
+		this.name = name;
 		// amount of money owned
 		this.money = 0.00;
 		// monthly income
-		this.income = 30.00;
+		this.income = 28.5;
 		// monthly expenses
 		this.expenses = 15.00;
 		// banked money
 		this.bank = 100.00;
 		// yearly bank interest
-		this.interest = 1.5;
+		this.interest = 6.1;
+		// current round
+		this.currentRound = 0;
 		// To-Do
-		// rate of food consuming; like the oregon trail game -- meager, filling, bare bones
-		// food purchasing system 
+		// purchasing system for supplies & 'upgrades' 
 		// inflation system
 		// 'wildcards' - random things that happen such as; "you got polio", "your business went bankrupt"
 		// , "you found a mysterious package containing $100"
 
 	};
+
 	depositCash(cash) {
 		if (this.money < cash) {
 			throw "Error: Tried to deposit more money than business owns.";
@@ -128,8 +132,18 @@ class Business {
 	};
 	
 	gainInterest() {
-		this.bank += ((this.interest/ 100) * this.bank).toFixed(2)
-	}
+		this.bank += ((this.bank/ 100) * this.interest).toFixed(2);
+	};
+
+	advanceRound() {
+		this.currentRound += 1;
+		if (this.currentRound % 128 === 0) {
+			this.gainInterest();
+		};
+		if (this.currentRound % 30 === 0) {
+			this.claimSalary();
+		};
+	};
 	
-}
+};
 
