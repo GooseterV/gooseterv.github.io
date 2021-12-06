@@ -28,17 +28,17 @@ async function crackEgg(eggstate) {
 
 	}
 	if (egghealth < 0) {
-		egg.firstElementChild.display = "none"
-		egg.firstElementChild.src = ""
-	}
+		egg.firstElementChild.display = "none";
+		egg.firstElementChild.src = "";
+	};
 	if (egghealth <= 5 && egghealth > 0 && egghealth != 0) {
-		egg.style = "animation: shake 0.25s cubic-bezier(.36,.07,.19,.97) both;"
-		await sleep(250)
-		egg.style = ""
-		egg.setAttribute("data-health", `${parseInt(egg.getAttribute("data-health"))-1}`)
-		egg.firstElementChild.src = "src/egg_crack2.png"
-		egg.firstElementChild.id = "egg-bigcrack"
-	}
+		egg.style = "animation: shake 0.25s cubic-bezier(.36,.07,.19,.97) both;";
+		await sleep(250);
+		egg.style = "";
+		egg.setAttribute("data-health", `${parseInt(egg.getAttribute("data-health"))-1}`);
+		egg.firstElementChild.src = "src/egg_crack2.png";
+		egg.firstElementChild.id = "egg-bigcrack";
+	};
 	if (egghealth <= 14 && egghealth > 5 && egghealth != 0) {
 		egg.style = "animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;"
 		await sleep(500)
@@ -88,17 +88,30 @@ class Business {
 		// setting the name of business for future reference
 		this.name = name;
 		// amount of money owned
-		this.money = 0.00;
+		this.money = 50.00;
 		// monthly income
-		this.income = 28.5;
-		// monthly expenses
-		this.expenses = 15.00;
+		this.income = 694.75;
+		// monthly expenses - WATER AND POWER (FIXED EXPENSES)
+		this.fixedBill = 125.00;
+		// monthly expenses - PURCHASED THINGS (VARIABLE EXPENSES)
+		this.varBill = 0.00;
 		// banked money
 		this.bank = 100.00;
-		// yearly bank interest
-		this.interest = 6.1;
+		// semi-annual bank interest
+		this.interest = 6.10;
 		// current round
 		this.currentRound = 0;
+		// business loans
+		this.loans = [
+
+		];
+		// tier of equipment, higher tier makes more money
+		this.equipmentTier = 1;
+		// employees of business
+		this.employees = [
+
+		];
+
 		// To-Do
 		// purchasing system for supplies & 'upgrades' 
 		// inflation system
@@ -134,9 +147,19 @@ class Business {
 	gainInterest() {
 		this.bank += ((this.bank/ 100) * this.interest).toFixed(2);
 	};
+	
+	payBill() {
+		this.money -= (this.varBill + this.fixedBill);
+	};
 
 	advanceRound() {
 		this.currentRound += 1;
+		if (this.loans.length > 0) {
+			for (let loan of this.loans) {
+				loan.days += 1;
+				loan.interest = 0.1 * loan.days;
+			};
+		};
 		if (this.currentRound % 128 === 0) {
 			this.gainInterest();
 		};
@@ -145,5 +168,43 @@ class Business {
 		};
 	};
 	
+	takeLoan(amount) {
+		if (this.loans.length < 3 && amount <= this.income) {
+			this.loans.push({
+				"amount":amount,
+				"id":[...Array(16)].map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
+				// interest per day of loan
+				"interest":0.00,
+				"paid":false,
+				// how many days in you are on the loan, interest increases based on this
+				"days":0
+			});
+			this.money += amount;
+		} else if (this.loans.length >= 3) {
+			throw "Error: You can only have 3 loans at a time.";
+		} else if (amount > this.income) {
+			throw "Error: You cannot take a loan for more money than you make.";
+		};
+	};
+
+	payLoan(id) {
+		for (let loan of this.loans) {
+			if (Object.values(loan).includes(id) && this.money >= loan.amount) {
+				this.loans.pop(this.loans.indexOf(loan)-1);
+				this.money -= loan.amount;
+			} else if (!(Object.values(loan).includes(id))) {
+				throw "Error: not a valid loan id!";
+			} else if (this.money < loan.amount) {
+				throw "Error: you do not have enough money to pay for this loan!";
+			};
+		};
+		
+	};
+	payAllLoans() {
+		for (let loan of this.loans) {
+			this.payLoan(loan.id);
+		};
+	};
+
 };
 
