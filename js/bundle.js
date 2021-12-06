@@ -158,7 +158,7 @@ class Business {
 			for (let loan of this.loans) {
 				loan.days += 1;
 				loan.interest = 0.1 * loan.days;
-				loan.amount += ((loan.amount/ 100) * loan.interest).toFixed(2);
+				loan.amount += ((loan.amount/100) * loan.interest).toFixed(2);
 			};
 		};
 		if (this.employees.length > 0) {
