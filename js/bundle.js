@@ -247,5 +247,12 @@ class Business {
 			this.payEmployee(employee.id);
 		};
 	};
+	payDebt() {
+		if (this.money >= this.debt) {
+			this.money -= this.debt;
+		} else if (this.money < this.debt) {
+			throw "Error: Not enough money to pay debt";
+		};
+	};
 };
 
