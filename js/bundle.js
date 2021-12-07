@@ -112,7 +112,7 @@ class Business {
 
 		];
 		// any debt caused by not having enough money
-		this.debt = 0;
+		this.debt = 0.00;
 		// To-Do
 		// purchasing system for supplies & 'upgrades' 
 		// inflation system
@@ -146,7 +146,7 @@ class Business {
 	};
 	
 	gainInterest() {
-		this.bank += ((this.bank/ 100) * this.interest).toFixed(2);
+		this.bank += parseFloat(((this.bank/ 100) * this.interest).toFixed(2));
 	};
 	
 	payBill() {
@@ -164,8 +164,8 @@ class Business {
 		if (this.loans.length > 0) {
 			for (let loan of this.loans) {
 				loan.days += 1;
-				loan.interest = 0.1 * loan.days;
-				loan.amount += ((loan.amount/100) * loan.interest).toFixed(2);
+				loan.interest = 0.05 * loan.days;
+				loan.amount += parseFloat(((loan.amount/100) * loan.interest).toFixed(2));
 			};
 		};
 		if (this.employees.length > 0) {
@@ -185,7 +185,8 @@ class Business {
 	takeLoan(amount) {
 		if (this.loans.length < 3 && amount <= this.income) {
 			this.loans.push({
-				"amount":amount,
+				"amount":parseFloat(amount.toFixed(2)),
+				"grossAmount":parseFloat(amount.toFixed(2)),
 				"id":[...Array(16)].map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
 				// interest per day of loan
 				"interest":0.00,
@@ -222,7 +223,7 @@ class Business {
 	};
 
 	hireEmployee() {
-		const wage = Math.random() * (29.36 - 15.72) + 14.78;
+		const wage = parseFloat((Math.random() * (29.36 - 15.72) + 14.78).toFixed(2));
 		this.employees.push({
 			"id":[...Array(12)].map(() => Math.floor(Math.random() * 16).toString(16)).join(''),
 			"wage":wage,
