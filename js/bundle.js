@@ -113,6 +113,8 @@ class Business {
 		];
 		// any debt caused by not having enough money
 		this.debt = 0.00;
+		// is the business bankrupt (game is over when business is bankrupt)
+		this.bankrupt = false;
 		// To-Do
 		// purchasing system for supplies & 'upgrades' 
 		// inflation system
@@ -126,7 +128,9 @@ class Business {
 			throw "Error: Tried to deposit more money than business owns.";
 		} else if (this.money >= cash) {
 			this.money -= cash;
+			this.money = parseFloat(this.money.toFixed(2));
 			this.bank += cash;
+			this.bank = parseFloat(this.bank.toFixed(2));
 			return (this.money, this.bank)
 		};
 	};
@@ -135,13 +139,16 @@ class Business {
 			throw "Error: Tried to withdraw more money than business has in bank.";
 		} else if (this.bank >= cash) {
 			this.bank -= cash;
+			this.bank = parseFloat(this.bank.toFixed(2));
 			this.money += cash;
+			this.money = parseFloat(this.money.toFixed(2));
 			return (this.money, this.bank)
 		};
 	};
 
 	claimSalary() {
 		this.money += this.income;
+		this.money = parseFloat(this.money.toFixed(2));
 		return this.money;
 	};
 	
@@ -153,8 +160,10 @@ class Business {
 		const total = (this.varBill + this.fixedBill);
 		if (total <= this.money) {
 			this.money -= total;
+			this.money = parseFloat(this.money.toFixed(2));
 		} else if (total > this.money) {
 			this.debt += total;
+			this.debt = parseFloat(this.debt.toFixed(2));
 			throw "Error: Not enouugh money to pay bills."
 		};
 	};
@@ -181,6 +190,9 @@ class Business {
 			this.claimSalary();
 			this.payAllEmployees();
 		};
+		if (this.debt > this.income) {
+			this.bankrupt = true;
+		};
 	};
 	
 	takeLoan(amount) {
@@ -196,7 +208,7 @@ class Business {
 				"days":0
 			});
 			this.money += amount;
-			this.money = parseFloat(this.money.toFixed(2))
+			this.money = parseFloat(this.money.toFixed(2));
 		} else if (this.loans.length >= 3) {
 			throw "Error: You can only have 3 loans at a time.";
 		} else if (amount > this.income) {
@@ -209,7 +221,7 @@ class Business {
 			if (Object.values(loan).includes(id) && this.money >= loan.amount) {
 				this.loans.pop(this.loans.indexOf(loan)-1);
 				this.money -= loan.amount;
-				this.money = parseFloat(this.money.toFixed(2))
+				this.money = parseFloat(this.money.toFixed(2));
 				loan.paid = true;
 			} else if (!(Object.values(loan).includes(id))) {
 				throw "Error: invalid loan id.";
@@ -238,12 +250,12 @@ class Business {
 		for (let employee of this.employees) {
 			if (Object.values(employee).includes(id) && this.money >= employee.wage) {
 				this.money -= employee.wage;
-				this.money = parseFloat(this.money.toFixed(2))
+				this.money = parseFloat(this.money.toFixed(2));
 			} else if (!(Object.values(employee).includes(id))) {
 				throw "Error: Invalid employee id.";
 			} else if (this.money < employee.wage) {
 				this.debt += employee.wage;
-				this.debt = parseFloat(this.debt.toFixed(2))
+				this.debt = parseFloat(this.debt.toFixed(2));
 				throw "Error: Not enough money to pay employee.";
 			};
 		};
@@ -256,7 +268,7 @@ class Business {
 	payDebt() {
 		if (this.money >= this.debt) {
 			this.money -= this.debt;
-			this.money = parseFloat(this.money.toFixed(2))
+			this.money = parseFloat(this.money.toFixed(2));
 		} else if (this.money < this.debt) {
 			throw "Error: Not enough money to pay debt";
 		};
