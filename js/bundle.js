@@ -111,7 +111,8 @@ class Business {
 		this.employees = [
 
 		];
-
+		// any debt caused by not having enough money
+		this.debt = 0;
 		// To-Do
 		// purchasing system for supplies & 'upgrades' 
 		// inflation system
@@ -149,7 +150,13 @@ class Business {
 	};
 	
 	payBill() {
-		this.money -= (this.varBill + this.fixedBill);
+		const total = (this.varBill + this.fixedBill);
+		if (total <= this.money) {
+			this.money -= total;
+		} else if (total > this.money) {
+			this.debt += total;
+			throw "Error: Not enouugh money to pay bills."
+		};
 	};
 
 	advanceRound() {
@@ -230,6 +237,7 @@ class Business {
 			} else if (!(Object.values(employee).includes(id))) {
 				throw "Error: Invalid employee id.";
 			} else if (this.money < employee.wage) {
+				this.debt += employee.wage;
 				throw "Error: Not enough money to pay employee.";
 			};
 		};
