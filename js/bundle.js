@@ -141,8 +141,8 @@ class Business {
 	};
 
 	claimSalary() {
-		factory.money += this.income;
-		return factory.money;
+		this.money += this.income;
+		return this.money;
 	};
 	
 	gainInterest() {
@@ -164,8 +164,9 @@ class Business {
 		if (this.loans.length > 0) {
 			for (let loan of this.loans) {
 				loan.days += 1;
-				loan.interest = 0.05 * loan.days;
+				loan.interest = parseFloat((0.1 * loan.days).toFixed(2));
 				loan.amount += parseFloat(((loan.amount/100) * loan.interest).toFixed(2));
+				loan.amount = parseFloat(loan.amount.toFixed(2))
 			};
 		};
 		if (this.employees.length > 0) {
@@ -195,6 +196,7 @@ class Business {
 				"days":0
 			});
 			this.money += amount;
+			this.money = parseFloat(this.money.toFixed(2))
 		} else if (this.loans.length >= 3) {
 			throw "Error: You can only have 3 loans at a time.";
 		} else if (amount > this.income) {
@@ -207,6 +209,7 @@ class Business {
 			if (Object.values(loan).includes(id) && this.money >= loan.amount) {
 				this.loans.pop(this.loans.indexOf(loan)-1);
 				this.money -= loan.amount;
+				this.money = parseFloat(this.money.toFixed(2))
 				loan.paid = true;
 			} else if (!(Object.values(loan).includes(id))) {
 				throw "Error: invalid loan id.";
@@ -235,10 +238,12 @@ class Business {
 		for (let employee of this.employees) {
 			if (Object.values(employee).includes(id) && this.money >= employee.wage) {
 				this.money -= employee.wage;
+				this.money = parseFloat(this.money.toFixed(2))
 			} else if (!(Object.values(employee).includes(id))) {
 				throw "Error: Invalid employee id.";
 			} else if (this.money < employee.wage) {
 				this.debt += employee.wage;
+				this.debt = parseFloat(this.debt.toFixed(2))
 				throw "Error: Not enough money to pay employee.";
 			};
 		};
@@ -251,6 +256,7 @@ class Business {
 	payDebt() {
 		if (this.money >= this.debt) {
 			this.money -= this.debt;
+			this.money = parseFloat(this.money.toFixed(2))
 		} else if (this.money < this.debt) {
 			throw "Error: Not enough money to pay debt";
 		};
