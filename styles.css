@@ -275,7 +275,7 @@ button:hover {
 	text-align:left;
 	margin-bottom:10px;
 }
-input {
+input, textarea {
 	font-family:'Quicksand';
 	color:black;
 	border-radius: 10px;
@@ -288,6 +288,7 @@ input {
 	margin:20px;
 	vertical-align: top;
 }
+
 ::placeholder {
 	color:black;
 	opacity:1;
