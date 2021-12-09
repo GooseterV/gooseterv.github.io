@@ -110,7 +110,7 @@ class Business {
 			this.claimSalary();
 			this.payAllEmployees();
 		};
-		if (this.debt > this.income) {
+		if (this.debt > (this.income + this.money + this.bank)) {
 			this.bankrupt = true;
 		};
 	};
