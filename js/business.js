@@ -190,9 +190,15 @@ class Business {
 	payDebt() {
 		if (this.money >= this.debt) {
 			this.money -= this.debt;
+			this.debt = 0.00;
 			this.money = parseFloat(this.money.toFixed(2));
 		} else if (this.money < this.debt) {
 			throw "Error: Not enough money to pay debt";
+		};
+	};
+	hireEmployees(amount) {
+		for (let i of Array(amount)) {
+			this.hireEmployee();
 		};
 	};
 };
