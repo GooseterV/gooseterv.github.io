@@ -54,6 +54,7 @@ class Business {
 			return (this.money, this.bank)
 		};
 	};
+	
 	withdrawCash(cash) {
 		if (this.bank < cash) {
 			throw "Error: Tried to withdraw more money than business has in bank.";
@@ -151,6 +152,7 @@ class Business {
 		};
 		
 	};
+
 	payAllLoans() {
 		for (let loan of this.loans) {
 			this.payLoan(loan.id);
@@ -205,5 +207,5 @@ class Business {
 			this.hireEmployee();
 		};
 	};
-	
+
 };
