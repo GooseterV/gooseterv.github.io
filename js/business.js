@@ -54,7 +54,7 @@ class Business {
 			return (this.money, this.bank)
 		};
 	};
-	
+
 	withdrawCash(cash) {
 		if (this.bank < cash) {
 			throw "Error: Tried to withdraw more money than business has in bank.";
@@ -85,7 +85,7 @@ class Business {
 		} else if (total > this.money) {
 			this.debt += total;
 			this.debt = parseFloat(this.debt.toFixed(2));
-			throw "Error: Not enouugh money to pay bills."
+			throw "Error: Not enouugh money to pay bills.";
 		};
 	};
 
@@ -96,7 +96,7 @@ class Business {
 				loan.days += 1;
 				loan.interest = parseFloat((0.1 * loan.days).toFixed(2));
 				loan.amount += parseFloat(((loan.amount/100) * loan.interest).toFixed(2));
-				loan.amount = parseFloat(loan.amount.toFixed(2))
+				loan.amount = parseFloat(loan.amount.toFixed(2));
 			};
 		};
 		if (this.employees.length > 0) {
