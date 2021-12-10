@@ -168,6 +168,7 @@ class Business {
 		});
 		this.employeeIds.push(employeeid);
 	};
+
 	payEmployee(id) {
 		for (let employee of this.employees) {
 			if (this.employeeIds.includes(id) && this.money >= employee.wage) {
@@ -182,11 +183,13 @@ class Business {
 			};
 		};
 	};
+
 	payAllEmployees() {
 		for (let employee of this.employees) {
 			this.payEmployee(employee.id);
 		};
 	};
+
 	payDebt() {
 		if (this.money >= this.debt) {
 			this.money -= this.debt;
@@ -196,9 +199,11 @@ class Business {
 			throw "Error: Not enough money to pay debt";
 		};
 	};
+
 	hireEmployees(amount) {
 		for (let i of Array(amount)) {
 			this.hireEmployee();
 		};
 	};
+	
 };
