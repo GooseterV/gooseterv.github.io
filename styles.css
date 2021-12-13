@@ -283,7 +283,7 @@ input, textarea {
 	font-size: 17px;
 	text-decoration: none;
 	border: 0.67rem solid transparent;
-	background-color:#fa0c97;
+	background-color:#e258a9;
 	outline:none;
 	margin:20px;
 	vertical-align: top;
@@ -292,6 +292,11 @@ input, textarea {
 ::placeholder {
 	color:black;
 	opacity:1;
+}
+
+body {
+	background-color:rgb(255, 74, 134);
+	/*background: url("src/bg.jpg");*/
 }
 @media (max-width: 480px)  {
 	.main-box-404 {
