@@ -3,12 +3,4 @@
 	"editor.fontSize": 13,
 	"editor.fontFamily": "'JetBrains Mono Medium', monospace",
 	"diffEditor.maxFileSize": 65,
-	"sqltools.connections": [
-		{
-			"previewLimit": 75,
-			"driver": "SQLite",
-			"database": "${workspaceFolder:gooseterv}/py/users.db",
-			"name": "users db (local) (for external repo)"
-		}
-	]
 }
